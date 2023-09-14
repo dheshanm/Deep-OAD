@@ -1,19 +1,19 @@
 import warnings
 
-warnings.simplefilter(action="ignore", category=FutureWarning)
-warnings.simplefilter(action="ignore", category=DeprecationWarning)
-warnings.simplefilter(action="ignore", category=UserWarning)
+# warnings.simplefilter(action="ignore", category=FutureWarning)
+# warnings.simplefilter(action="ignore", category=DeprecationWarning)
+# warnings.simplefilter(action="ignore", category=UserWarning)
 
 import logging
 import os
 import sys
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # suppress TensorFlow messages
-logging.getLogger("tensorflow").setLevel(logging.FATAL)  # suppress TensorFlow messages
+# os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # suppress TensorFlow messages
+# logging.getLogger("tensorflow").setLevel(logging.FATAL)  # suppress TensorFlow messages
 
-# Keras outputs warnings using `print` to stderr so let's direct that to devnull temporarily
-stderr = sys.stderr
-sys.stderr = open(os.devnull, "w")
+# # Keras outputs warnings using `print` to stderr so let's direct that to devnull temporarily
+# stderr = sys.stderr
+# sys.stderr = open(os.devnull, "w")
 
 import argparse
 
@@ -23,7 +23,7 @@ from processing import preprocess
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-sys.stderr = stderr
+# sys.stderr = stderr
 
 
 class Inference:
@@ -31,7 +31,7 @@ class Inference:
         logger.info("Loading Models")
         self.vit_model = load_vit_model()
 
-    def predict(self, model_name, image_path):
+    def predict(self, image_path, model_name="vit"):
         X = preprocess(model_name, image_path)
 
         y = self.vit_model.predict(X)[0][0]
@@ -52,4 +52,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
     model = Inference()
-    model.predict(args.model_name, args.image_path)
+    angle = model.predict(args.image_path)
+
+    print(f"Predicted angle is: {angle} degree")

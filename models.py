@@ -1,6 +1,6 @@
-from config import VIT_WEIGHTS_PATH
-from architectures import create_vit_architecture
-import tensorflow as tf
+from .config import VIT_WEIGHTS_PATH
+from .architectures import create_vit_architecture
+
 
 def load_vit_model(load_pretrained_weights=True):
     model = create_vit_architecture()

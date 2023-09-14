@@ -1,7 +1,7 @@
 import os
 
 ROOT_DIR = os.getcwd()
-VIT_WEIGHTS_PATH = "weights/model-vit-ang-loss.h5"
+VIT_WEIGHTS_PATH = "/PHShome/dm1447/dev/db/runners/deep_oad/weights/model-vit-ang-loss.h5"
 
 SAVE_IMAGE_DIR = os.path.join("/tmp/")
 
